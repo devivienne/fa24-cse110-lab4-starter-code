@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, ReactNode } from "react";
 import { Expense } from "../types/types";
 
 // Exercise: Create add budget to the context
@@ -15,17 +15,12 @@ const initialState: AppContextType = {
 
 export const AppContext = createContext<AppContextType>(initialState);
 
-export const AppProvider = (props: any) => {
+export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [expenses, setExpenses] = useState<Expense[]>(initialState.expenses);
 
   return (
-    <AppContext.Provider
-      value={{
-        expenses: expenses,
-        setExpenses: setExpenses,
-      }}
-    >
-      {props.children}
+    <AppContext.Provider value={{ expenses, setExpenses }}>
+      {children}
     </AppContext.Provider>
   );
 };
