@@ -13,5 +13,5 @@ import App from './App';
 test('renders learn react link', () => {
   render(<App />);
   const linkElement = screen.getByText(/My Budget Planner/i);
-  expect(linkElement).toBeDefined(); 
+  expect(linkElement).toBeNull(); 
 });
