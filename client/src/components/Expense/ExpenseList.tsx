@@ -2,7 +2,7 @@ import ExpenseItem from "./ExpenseItem";
 import { AppContext } from "../../context/AppContext";
 import { useContext, useEffect } from "react";
 import { Expense } from "../../types/types";
-import { fetchExpenses } from "../../../../server/src/utils/expense-utils";
+import { fetchExpenses } from "../../utils/expense-utils";
 
 
 const ExpenseList = () => {

@@ -22,8 +22,8 @@ const AddExpenseForm = () => {
     event.preventDefault();
     const newExpense: Expense = {
       id: Date.now().toString(), 
-      //changed here, name --> description and added : ""
-      description:"",
+      //changed here
+      description: name,
       cost: parseFloat(cost),
     };
 
