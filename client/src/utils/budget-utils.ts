@@ -17,3 +17,23 @@ export const fetchBudget = async (): Promise<number> => {
 
     return budgetData; 
 };
+
+// Function to update the budget in the backend. Method: PUT
+export const updateBudget = async (newBudget: number): Promise<number> => {
+    const response = await fetch(`${API_BASE_URL}/budget`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ amount: newBudget }),
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to update budget');
+    }
+
+    const jsonResponse = await response.json();
+    console.log("data in updateBudget", jsonResponse);
+
+    return jsonResponse.data;
+};
