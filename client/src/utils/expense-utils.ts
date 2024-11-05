@@ -29,6 +29,7 @@ export const deleteExpense = async (id: string): Promise<void> => {
 	}
 };
 
+
 // Function to get all expenses from the backend. Method: GET
 export const fetchExpenses = async (): Promise<Expense[]> => {
 	const response = await fetch(`${API_BASE_URL}/expenses`);
