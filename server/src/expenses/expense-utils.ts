@@ -150,13 +150,16 @@ export async function deleteExpense(req: Request, res: Response, db: Database) {
     const { id } = req.params;
 
     try {
-        const result = await db.run('DELETE FROM expenses WHERE id = ?;', [id]);
+        // Check if the expense exists before attempting to delete it
+        const expense = await db.get('SELECT * FROM expenses WHERE id = ?;', [id]);
 
-        if (result.changes === 0) {
+        if (!expense) {
             return res.status(404).json({ message: 'Expense not found' });
-        } else {
-            res.status(200).json({ message: 'Expense successfully deleted' });
         }
+
+        // Delete the expense and ensure changes are checked
+        await db.run('DELETE FROM expenses WHERE id = ?;', [id]);
+        res.status(200).json({ message: 'Expense successfully deleted' });
     } catch (error) {
         return res.status(400).send({ error: `Could not delete expense, ${error}` });
     }
