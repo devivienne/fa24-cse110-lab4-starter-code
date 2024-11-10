@@ -6,12 +6,26 @@ const ExpenseItem = (currentExpense: Expense) => {
   // Exercise: Consume the AppContext here
   const { expenses, setExpenses } = useContext(AppContext);
 
-  const handleDeleteExpense = (currentExpense: Expense) => {
+  const handleDeleteExpense = async (currentExpense: Expense) => {
     // Exercise: Remove expense from expenses context array
-    const updatedExpenses = expenses.filter(
-      (expense) => expense.id !== currentExpense.id
-    );
-    setExpenses(updatedExpenses);
+    try {
+      // Send DELETE request to server
+      const response = await fetch(`http://localhost:8080/expenses/${currentExpense.id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        // Remove expense from local state if deletion was successful
+        const updatedExpenses = expenses.filter(
+          (expense) => expense.id !== currentExpense.id
+        );
+        setExpenses(updatedExpenses);
+      } else {
+        console.error("Failed to delete expense:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error deleting expense:", error);
+    }
   };
 
   return (
