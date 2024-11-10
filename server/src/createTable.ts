@@ -1,5 +1,8 @@
-import sqlite3 from "sqlite3";
-import { open } from "sqlite";
+//import sqlite3 from "sqlite3"; //allows to use SQLite with Node.js
+//import { open } from "sqlite";
+
+import sqlite3 from "sqlite3"; // The driver for the database
+import { open, Database } from "sqlite"; // Use `Database` type from `sqlite`
 
 const initDB = async () => {
  // Open the database connection
