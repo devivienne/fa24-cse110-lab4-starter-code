@@ -31,12 +31,13 @@
 
 // createExpenseEndpoints(app, expenses);
 
-
+import { Database } from "sqlite"; 
+import sqlite3 from "sqlite3";
 import { Response } from "express";
 import { createBudgetEndpoints } from "./budget/budget-endpoints";
 import { createExpenseEndpoints } from "./expenses/expense-endpoints";
 import { budget } from "./constants";
-import initDB from "./createTable";
+import initDB from "./createTable"; // function resposible for connection to SQLite database
 
 const express = require("express");
 const cors = require("cors");
@@ -57,7 +58,7 @@ app.listen(port, () => {
  const db = await initDB();
 
  // Root endpoint to get test if the server is running
- app.get("/", (res: Response) => {
+ app.get("/", (req: Request, res: Response) => {
    res.send({ "data": "Hello, TypeScript Express!" });
    res.status(200);
  });
